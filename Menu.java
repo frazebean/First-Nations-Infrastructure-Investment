@@ -35,75 +35,83 @@ public class Menu
             }
             System.out.println("> 0.  Exit Program");
 
-            System.out.print("\nSelection: ");
-            menuSelection = input.nextInt();
-            input.nextLine();
-
-            if(menuSelection == 1)
+            try
             {
-                System.out.println("\nThe total number of projects in Canada: XYZ");
-                System.out.println("The total number of Ongoing projects: XYZ");
-                System.out.println("The total number of projects Completed: XYZ");
-                System.out.println("The percentage of Completed Projects: XYZ\n");
-            }
-            else if(menuSelection >= 2 && menuSelection <= 14)
-            {
-                while(statisticsMenuLoop)
-                {
-                    System.out.println("\nPlease make a choice from the statistics below for " +
-                    menuOptions[menuSelection-1] + ":");
-                    System.out.println("> 1. Number of projects" +
-                                    "\n> 2. Percentage of all projects located in this province/territory" +
-                                    "\n> 3. Total number and percentage of Ongoing projects" +
-                                    "\n> 4. Total number and percentage of Completed projects" +
-                                    "\n> 5. All of the above statistics" +
-                                    "\n> 6. Return to main menu");
+                System.out.print("\nSelection: ");
+                menuSelection = input.nextInt();
+                input.nextLine();
     
-                    System.out.print("\nChoice: ");
-                    statisticsChoice = input.nextInt();
-                    input.nextLine();
-
-                    switch(statisticsChoice)
+                if(menuSelection == 1)
+                {
+                    System.out.println("\nThe total number of projects in Canada: XYZ");
+                    System.out.println("The total number of Ongoing projects: XYZ");
+                    System.out.println("The total number of projects Completed: XYZ");
+                    System.out.println("The percentage of Completed Projects: XYZ\n");
+                }
+                else if(menuSelection >= 2 && menuSelection <= 14)
+                {
+                    while(statisticsMenuLoop)
                     {
-                        case 1:
-                            // Display number of projects
-                            break;
-                        
-                        case 2:
-                            // Display percentage of all projects located in province/territory
-                            break;
-
-                        case 3:
-                            // Display total number and percentage of Ongoing projects
-                            break;
-
-                        case 4:
-                            // Display total number and percentage of Completed projects
-                            break;
-
-                        case 5:
-                            // Display all above statistics
-                            break;
-
-                        case 6:
-                            statisticsMenuLoop = false;
-                            System.out.println();
-                            break;
-
-                        default:
-                            System.out.println("You must enter a valid choice.");
+                        System.out.println("\nPlease make a choice from the statistics below for " +
+                        menuOptions[menuSelection-1] + ":");
+                        System.out.println("> 1. Number of projects" +
+                                        "\n> 2. Percentage of all projects located in this province/territory" +
+                                        "\n> 3. Total number and percentage of Ongoing projects" +
+                                        "\n> 4. Total number and percentage of Completed projects" +
+                                        "\n> 5. All of the above statistics" +
+                                        "\n> 6. Return to main menu");
+        
+                        System.out.print("\nChoice: ");
+                        statisticsChoice = input.nextInt();
+                        input.nextLine();
+    
+                        switch(statisticsChoice)
+                        {
+                            case 1:
+                                // Display number of projects
+                                break;
+                            
+                            case 2:
+                                // Display percentage of all projects located in province/territory
+                                break;
+    
+                            case 3:
+                                // Display total number and percentage of Ongoing projects
+                                break;
+    
+                            case 4:
+                                // Display total number and percentage of Completed projects
+                                break;
+    
+                            case 5:
+                                // Display all above statistics
+                                break;
+    
+                            case 6:
+                                statisticsMenuLoop = false;
+                                System.out.println();
+                                break;
+    
+                            default:
+                                System.out.println("\nYou must enter a valid choice.");
+                        }
                     }
                 }
+                else if(menuSelection == 0)
+                {
+                    System.out.println("\nExiting Program...");
+                    mainMenuLoop = false;
+                }
+                else
+                {
+                    System.out.println("\nYou must enter a valid selection.\n");
+                } 
             }
-            else if(menuSelection == 0)
+            catch(InputMismatchException error)
             {
-                System.out.println("\nExiting Program...");
-                mainMenuLoop = false;
+                System.out.println("\nYou must enter an integer!\n");
+                input.nextLine();
             }
-            else
-            {
-                System.out.println("\nYou must enter a valid selection.\n");
-            }   
         }
     }
 }
