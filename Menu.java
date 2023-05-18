@@ -60,40 +60,48 @@ public class Menu
                                         "\n> 4. Total number and percentage of Completed projects" +
                                         "\n> 5. All of the above statistics" +
                                         "\n> 6. Return to main menu");
-        
-                        System.out.print("\nChoice: ");
-                        statisticsChoice = input.nextInt();
-                        input.nextLine();
-    
-                        switch(statisticsChoice)
+
+                        try
                         {
-                            case 1:
-                                // Display number of projects
-                                break;
-                            
-                            case 2:
-                                // Display percentage of all projects located in province/territory
-                                break;
-    
-                            case 3:
-                                // Display total number and percentage of Ongoing projects
-                                break;
-    
-                            case 4:
-                                // Display total number and percentage of Completed projects
-                                break;
-    
-                            case 5:
-                                // Display all above statistics
-                                break;
-    
-                            case 6:
-                                statisticsMenuLoop = false;
-                                System.out.println();
-                                break;
-    
-                            default:
-                                System.out.println("\nYou must enter a valid choice.");
+                            System.out.print("\nChoice: ");
+                            statisticsChoice = input.nextInt();
+                            input.nextLine();
+        
+                            switch(statisticsChoice)
+                            {
+                                case 1:
+                                    // Display number of projects
+                                    break;
+                                
+                                case 2:
+                                    // Display percentage of all projects located in province/territory
+                                    break;
+        
+                                case 3:
+                                    // Display total number and percentage of Ongoing projects
+                                    break;
+        
+                                case 4:
+                                    // Display total number and percentage of Completed projects
+                                    break;
+        
+                                case 5:
+                                    // Display all above statistics
+                                    break;
+        
+                                case 6:
+                                    statisticsMenuLoop = false;
+                                    System.out.println();
+                                    break;
+        
+                                default:
+                                    System.out.println("\nYou must enter a valid choice.");
+                            }
+                        }
+                        catch(InputMismatchException error)
+                        {
+                            System.out.println("\nYou must enter an integer!");
+                            input.nextLine();
                         }
                     }
                 }
