@@ -20,19 +20,9 @@ public class Menu
 
         while(mainMenuLoop)
         {
-            // FOR loop sandwiched between the two print statements are to display the menu.
+            // Display the menu options.
             System.out.println("Please make a selection from the Menu below.\n");
-            for(int i = 0; i < menuOptions.length; i++)
-            {
-                if(i+1 >= 1 && i+1 <= 9)
-                {
-                    System.out.println("> " + (i+1) + ".  " + menuOptions[i]);
-                }
-                else
-                {
-                    System.out.println("> " + (i+1) + ". " + menuOptions[i]);
-                }
-            }
+            displayMenuOptions(menuOptions);
             System.out.println("> 0.  Exit Program");
 
             try
@@ -119,6 +109,21 @@ public class Menu
             {
                 System.out.println("\nYou must enter an integer!\n");
                 input.nextLine();
+            }
+        }
+    }
+
+    public static void displayMenuOptions(String[] pMenuOptions)
+    {
+        for(int i = 0; i < pMenuOptions.length; i++)
+        {
+            if(i+1 >= 1 && i+1 <= 9)
+            {
+                System.out.println("> " + (i+1) + ".  " + pMenuOptions[i]);
+            }
+            else
+            {
+                System.out.println("> " + (i+1) + ". " + pMenuOptions[i]);
             }
         }
     }
