@@ -59,4 +59,37 @@ public class Location
         longitude = -50.00;
         coordinateSystem = "GCS_North_American_1983_CSRS";
     }
+
+    // toString method
+    public String toString()
+    {
+        String locationString;
+        locationString = "Latitude is " + latitude +
+                         "\nLongitude is " + longitude +
+                         "\nCoordinate system is " + coordinateSystem;
+
+        return locationString;
+    }
+    // equals method
+    public boolean equals(Object inObject)
+    {
+        boolean isEqual = false;
+        Location inLocation = null;
+
+        if(inLocation instanceof Location)
+        {
+            inLocation = (Location)inObject;
+            if(latitude == inLocation.getLatitude())
+            {
+                if(longitude == inLocation.getLongitude())
+                {
+                    if(coordinateSystem.equals(inLocation.getCoordinateSystem()))
+                    {
+                        isEqual = true;
+                    }
+                }
+            }
+        }
+        return isEqual;
+    }
 }
