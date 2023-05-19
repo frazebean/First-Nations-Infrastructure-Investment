@@ -9,6 +9,8 @@ public class Project
     private String stage;
     private Location location;
 
+    // Project class will contain Location object as one of the class fields (Aggregation)
+
     // Accessor for province
     public String getProvince()
     {
@@ -73,16 +75,5 @@ public class Project
     public void setStage(String pStage)
     {
         stage = pStage;
-    }
-
-    // Accessor for location
-    public Location getLocation()
-    {
-        return location;
-    }
-    // Mutator for location
-    public void setLocation(Location pLocation)
-    {
-        location = pLocation;
     }
 }

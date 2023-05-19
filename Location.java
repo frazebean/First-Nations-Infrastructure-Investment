@@ -37,4 +37,26 @@ public class Location
     {
         coordinateSystem = pCoordinateSystem;
     }
+
+    // Constructor with parameters
+    public Location(double pLatitude, double pLongitude, String pCoordinateSystem)
+    {
+        latitude = pLatitude;
+        longitude = pLongitude;
+        coordinateSystem = pCoordinateSystem;
+    }
+    // Copy constructor
+    public Location(Location pLocation)
+    {
+        latitude = pLocation.getLatitude();
+        longitude = pLocation.getLongitude();
+        coordinateSystem = pLocation.getCoordinateSystem();
+    }
+    // Default constructor
+    public Location()
+    {
+        latitude = 50.00;
+        longitude = -50.00;
+        coordinateSystem = "GCS_North_American_1983_CSRS";
+    }
 }
