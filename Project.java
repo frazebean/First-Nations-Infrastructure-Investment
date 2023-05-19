@@ -76,4 +76,50 @@ public class Project
     {
         stage = pStage;
     }
+
+    // Accessor for location
+    public Location getLocation()
+    {
+        return location;
+    }
+    // Mutator for location
+    public void setLocation(Location pLocation)
+    {
+        location = pLocation;
+    }
+
+    // Constructor with parameters
+    public Project(String pProvince, String pBeneficiary, String pBeneficiaryNum,
+    String pAssetClass, String pName, String pStage, Location pLocation)
+    {
+        province = pProvince;
+        beneficiary = pBeneficiary;
+        beneficiaryNum = pBeneficiaryNum;
+        assetClass = pAssetClass;
+        name = pName;
+        stage = pStage;
+        location = pLocation;
+    }
+    // Copy constructor
+    public Project(Project pProject)
+    {
+        province = pProject.getProvince();
+        beneficiary = pProject.getBeneficiary();
+        beneficiaryNum = pProject.getBeneficiaryNum();
+        assetClass = pProject.getAssetClass();
+        name = pProject.getName();
+        stage = pProject.getStage();
+        location = new Location();
+    }
+    // Default constructor
+    public Project()
+    {
+        province = "NULL province";
+        beneficiary = "NULL beneficiary";
+        beneficiaryNum = "NULL beneficiaryNum";
+        assetClass = "NULL assetClass";
+        name = "NULL name";
+        stage = "NULL stage";
+        location = new Location();
+    }
 }
