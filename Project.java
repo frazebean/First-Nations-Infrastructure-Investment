@@ -109,7 +109,7 @@ public class Project
         assetClass = pProject.getAssetClass();
         name = pProject.getName();
         stage = pProject.getStage();
-        location = new Location();
+        location = pProject.getLocation();
     }
     // Default constructor
     public Project()
@@ -121,5 +121,54 @@ public class Project
         name = "NULL name";
         stage = "NULL stage";
         location = new Location();
+    }
+
+    // toString method
+    public String toString()
+    {
+        String projectString;
+        projectString = "Province is " + province +
+                        "\nBeneficiary is " + beneficiary +
+                        "\nBeneficiary Number is " + beneficiaryNum +
+                        "\nAsset class is " + assetClass +
+                        "\nName is " + name +
+                        "\nStage is " + stage +
+                        "\nLocation is " + location;
+
+        return projectString;
+    }
+    // equals method
+    public boolean equals(Object inObject)
+    {
+        boolean isEqual = false;
+        Project inProject = null;
+
+        if(inProject instanceof Project)
+        {
+            inProject = (Project)inProject;
+            if(province.equals(inProject.getProvince()))
+            {
+                if(beneficiary.equals(inProject.getBeneficiary()))
+                {
+                    if(beneficiaryNum.equals(inProject.getBeneficiaryNum()))
+                    {
+                        if(assetClass.equals(inProject.getAssetClass()))
+                        {
+                            if(name.equals(inProject.getName()))
+                            {
+                                if(stage.equals(inProject.getStage()))
+                                {
+                                    if(location.equals(inProject.getLocation()))
+                                    {
+                                        isEqual = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return isEqual;
     }
 }
