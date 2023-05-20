@@ -23,6 +23,48 @@ public class Menu
         String path = "First_Nation_Infrastructure_Investment.csv";
 
         int arraySize = numberOfLines(path, fs, isr, br);
+        Project[] projectArray = new Project[arraySize];
+
+        System.out.println(projectArray.length);
+
+        try
+        {
+            fs = new FileInputStream(path);
+            isr = new InputStreamReader(fs);
+            br = new BufferedReader(isr);
+            int lineNum = 0;
+            String line = br.readLine();
+
+            line = br.readLine();
+
+            while(line != null)
+            {
+                String fields[];
+                fields = line.split(",");
+
+                String province = fields[0];
+                String beneficiary = fields[1];
+                String beneficiaryNum = fields[2];
+                String assetClass = fields[3];
+                String name = fields[4];
+                String stage = fields[6];
+
+                double latitude = Double.parseDouble(fields[7]);
+                double longitude = Double.parseDouble(fields[8]);
+                String coordinateSystem = fields[9];
+                Location location = new Location(latitude, longitude, coordinateSystem);
+
+                projectArray[lineNum] = new Project(province, beneficiary, beneficiaryNum,
+                assetClass, name, stage, location);
+
+                System.out.println(projectArray[lineNum]);
+                System.out.println(lineNum);
+
+                lineNum++;
+                line = br.readLine();
+            }
+        }
+        catch(IOException error){}
 
         System.out.println("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of 'XYZ' projects throughout Canada.");
