@@ -1,10 +1,15 @@
 import java.util.*;
+import java.io.*;
 
 public class Menu 
 {
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
+
+        FileInputStream fs = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
 
         /* Array that stores provinces/territories. To be used if user selects a specific
            province or territory in Canada. */
@@ -15,6 +20,9 @@ public class Menu
 
         int menuSelection, statisticsChoice;
         boolean mainMenuLoop = true;
+        String path = "First_Nation_Infrastructure_Investment.csv";
+
+        int arraySize = numberOfLines(path, fs, isr, br);
 
         System.out.println("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of 'XYZ' projects throughout Canada.");
@@ -142,5 +150,31 @@ public class Menu
         "\n> 4. Total number and percentage of Completed projects" +
         "\n> 5. All of the above statistics" +
         "\n> 6. Return to main menu");
+    }
+
+    public static int numberOfLines(String pFileName, FileInputStream fs, InputStreamReader isr,
+    BufferedReader br)
+    {
+        String line;
+        int lineNum = 0;
+
+        try
+        {
+            fs = new FileInputStream(pFileName);
+            isr = new InputStreamReader(fs);
+            br = new BufferedReader(isr);
+            line = br.readLine();
+
+            while(line != null)
+            {
+                lineNum++;
+                line = br.readLine();
+            }
+            fs.close();
+        }
+        catch(IOException error)
+        {}
+
+        return lineNum;
     }
 }
