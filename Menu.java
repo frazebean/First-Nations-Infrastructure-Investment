@@ -64,14 +64,9 @@ public class Menu
         }
         catch(IOException error){}
 
-        for(int i = 0; i < projectArray.length; i++)
-        {
-            System.out.println(projectArray[i]);
-            System.out.println(i);
-        }
-
         System.out.println("Welcome to the Investments in Indigenous community " +
-        "infrastructure\nProgram. There are a total of 'XYZ' projects throughout Canada.");
+        "infrastructure\nProgram. There are a total of " + totalNumProjects(projectArray) + 
+        " projects throughout Canada.");
 
         while(mainMenuLoop)
         {
@@ -222,5 +217,16 @@ public class Menu
         {}
 
         return lineNum;
+    }
+
+    public static int totalNumProjects(Project[] pProjectArray)
+    {
+        int totalNum = 0;
+
+        for(int i = 0; i < pProjectArray.length; i++)
+        {
+            totalNum++;
+        }
+        return totalNum;
     }
 }
