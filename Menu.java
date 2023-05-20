@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.swing.text.PlainDocument;
+
 import java.io.*;
 
 public class Menu 
@@ -23,9 +26,7 @@ public class Menu
         String path = "First_Nation_Infrastructure_Investment.csv";
 
         int arraySize = numberOfLines(path, fs, isr, br);
-        Project[] projectArray = new Project[arraySize];
-
-        System.out.println(projectArray.length);
+        Project[] projectArray = new Project[arraySize-1];
 
         try
         {
@@ -57,14 +58,17 @@ public class Menu
                 projectArray[lineNum] = new Project(province, beneficiary, beneficiaryNum,
                 assetClass, name, stage, location);
 
-                System.out.println(projectArray[lineNum]);
-                System.out.println(lineNum);
-
                 lineNum++;
                 line = br.readLine();
             }
         }
         catch(IOException error){}
+
+        for(int i = 0; i < projectArray.length; i++)
+        {
+            System.out.println(projectArray[i]);
+            System.out.println(i);
+        }
 
         System.out.println("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of 'XYZ' projects throughout Canada.");
