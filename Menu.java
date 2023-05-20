@@ -1,7 +1,4 @@
 import java.util.*;
-
-import javax.swing.text.PlainDocument;
-
 import java.io.*;
 
 public class Menu 
@@ -82,7 +79,7 @@ public class Menu
     
                 if(menuSelection == 1)
                 {
-                    displayAllOfCanadaInfo();
+                    displayAllOfCanadaInfo(projectArray);
                 }
                 else if(menuSelection >= 2 && menuSelection <= 14)
                 {
@@ -175,12 +172,12 @@ public class Menu
         "\n> 0.  Exit Program");
     }
 
-    public static void displayAllOfCanadaInfo()
+    public static void displayAllOfCanadaInfo(Project[] pProjectArray)
     {
-        System.out.println("\nThe total number of projects in Canada: XYZ");
-        System.out.println("The total number of Ongoing projects: XYZ");
-        System.out.println("The total number of projects Completed: XYZ");
-        System.out.println("The percentage of Completed Projects: XYZ\n");
+        System.out.println("\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray));
+        System.out.println("The total number of Ongoing projects: " + totalNumOngoingProjects(pProjectArray));
+        System.out.println("The total number of projects Completed: " + totalNumCompletedProjects(pProjectArray));
+        System.out.println("The percentage of Completed Projects: " + percentCompletedProjects(pProjectArray) + "%\n");
     }
 
     public static void displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
@@ -228,5 +225,51 @@ public class Menu
             totalNum++;
         }
         return totalNum;
+    }
+
+    public static int totalNumOngoingProjects(Project[] pProjectArray)
+    {
+        int totalNumOngoing = 0;
+
+        for(int i = 0; i < pProjectArray.length; i++)
+        {
+            String stage = pProjectArray[i].getStage();
+
+            if(stage.equals("Ongoing"))
+            {
+                totalNumOngoing++;
+            }
+        }
+        return totalNumOngoing;
+    }
+
+    public static int totalNumCompletedProjects(Project[] pProjectArray)
+    {
+        int totalNumCompleted = 0;
+
+        for(int i = 0; i < pProjectArray.length; i++)
+        {
+            String stage = pProjectArray[i].getStage();
+
+            if(stage.equals("Completed"))
+            {
+                totalNumCompleted++;
+            }
+        }
+        return totalNumCompleted;
+    }
+
+    public static double percentCompletedProjects(Project[] pProjectArray)
+    {
+        double divisionResult = 0.0;
+
+        int totalNumProjects = totalNumProjects(pProjectArray);
+        int totalNumCompleted = totalNumCompletedProjects(pProjectArray);
+
+        divisionResult = (double)totalNumCompleted / (double)totalNumProjects;
+        double percentage = divisionResult * 100.0;
+        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;  // Got from StackOverflow
+
+        return roundedPercentage;
     }
 }
