@@ -85,8 +85,10 @@ public class Menu
                 {
                     while(statisticsMenuLoop)
                     {
+                        String provOrTerrChosen = provAndTerr[menuSelection-2];
+
                         System.out.println("\nPlease make a choice from the statistics below for " +
-                        provAndTerr[menuSelection-2] + ":");
+                        provOrTerrChosen + ":");
 
                         displayProvTerrMenu();
 
@@ -99,11 +101,13 @@ public class Menu
                             switch(statisticsChoice)
                             {
                                 case 1:
-                                    // Display number of projects
+                                    System.out.print("Number of projects in this province/territory: " +
+                                    numProjectsProvTerr(projectArray, provOrTerrChosen) + "\n");
                                     break;
                                 
                                 case 2:
-                                    // Display percentage of all projects located in province/territory
+                                    System.out.print("Percentage of all projects location in this province/territory: " +
+                                    percentAllProvTerr(projectArray, provOrTerrChosen) + "%\n");
                                     break;
         
                                 case 3:
@@ -263,12 +267,40 @@ public class Menu
     {
         double divisionResult = 0.0;
 
-        int totalNumProjects = totalNumProjects(pProjectArray);
+        int totalNum = totalNumProjects(pProjectArray);
         int totalNumCompleted = totalNumCompletedProjects(pProjectArray);
 
-        divisionResult = (double)totalNumCompleted / (double)totalNumProjects;
+        divisionResult = (double)totalNumCompleted / (double)totalNum;
         double percentage = divisionResult * 100.0;
         double roundedPercentage = Math.round(percentage * 100.0) / 100.0;  // Got from StackOverflow
+
+        return roundedPercentage;
+    }
+
+    public static int numProjectsProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        int totalNum = 0;
+
+        for(int i = 0; i < pProjectArray.length; i++)
+        {
+            if(pProjectArray[i].getProvince().equals(pProvOrTerrChosen))
+            {
+                totalNum++;
+            }
+        }
+        return totalNum;
+    }
+
+    public static double percentAllProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        double divisionResult = 0.0;
+
+        int totalNum = totalNumProjects(pProjectArray);
+        int numProvTerr = numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
+
+        divisionResult = (double)numProvTerr / (double)totalNum;
+        double percentage = divisionResult * 100.0;
+        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;
 
         return roundedPercentage;
     }
