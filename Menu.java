@@ -212,14 +212,13 @@ public class Menu
         InputStreamReader isr;
         BufferedReader br;
         String line;
-        int lineNum;
+        int lineNum = 0;
         
         try
         {
             fs = new FileInputStream(pFileName);
             isr = new InputStreamReader(fs);
             br = new BufferedReader(isr);
-            lineNum = 0;
             line = br.readLine();
             line = br.readLine();
 
