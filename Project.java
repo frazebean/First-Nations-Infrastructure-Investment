@@ -1,3 +1,11 @@
+/********************************************************************************************
+ * Author: Ajmel Muadz                                                                      *
+ * Curtin Student ID: 21485604                                                              *
+ * Created: 21/05/2023                                                                      *   
+ * Purpose: Project class used for instantiating project objects to be stored in the        *
+ *          projectArray array in the Menu.java class                                       *
+ ********************************************************************************************/
+
 public class Project 
 {
     // Class fields
@@ -8,8 +16,6 @@ public class Project
     private String name;
     private String stage;
     private Location location;
-
-    // Project class will contain Location object as one of the class fields (Aggregation)
 
     // Accessor for province
     public String getProvince()
