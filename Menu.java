@@ -201,14 +201,14 @@ public class Menu
 
     public static String displayCase1Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
-        String case1Results = "Number of projects in this province/territory: " +
+        String case1Results = "\nNumber of projects in this province/territory: " +
         numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
 
         return case1Results;
     }
     public static String displayCase2Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
-        String case2Results = "Percentage of all projects location in this province/territory: " +
+        String case2Results = "\nPercentage of all projects location in this province/territory: " +
         calculatePercentage(numProjectsProvTerr(pProjectArray, pProvOrTerrChosen),
         totalNumProjects(pProjectArray)) + "%";
 
@@ -216,10 +216,10 @@ public class Menu
     }
     public static String displayCase3Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
-        String case3Results = "Total number of Ongoing projects in this province/territory: " +
+        String case3Results = "\nTotal number of Ongoing projects in this province/territory: " +
         totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray) + "" +
 
-        "Percentage of Ongoing projects in this province/territory: " +
+        "\nPercentage of Ongoing projects in this province/territory: " +
         calculatePercentage(totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray),
         numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%";
 
@@ -227,10 +227,10 @@ public class Menu
     }
     public static String displayCase4Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
-        String case4Results = "Total number of Completed projects in this province/territory: " +
+        String case4Results = "\nTotal number of Completed projects in this province/territory: " +
         totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray) + "" +
 
-        "Percentage of Completed projects in this province/territory: " +
+        "\nPercentage of Completed projects in this province/territory: " +
         calculatePercentage(totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray),
         numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%";
 
