@@ -26,23 +26,23 @@ public class Menu
 
         printAndLog("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of " + totalNumProjects(projectArray) + 
-        " projects throughout Canada.", logFile, false);
+        " projects throughout Canada.", logFile, false, "println");
 
         while(mainMenuLoop)
         {
             boolean statisticsMenuLoop = true;
 
-            printAndLog(displayMainMenu(), logFile, true);
+            printAndLog(displayMainMenu(), logFile, true, "println");
 
             try
             {
-                printAndLog("\nSelection: ", logFile, true);
+                printAndLog("\nSelection: ", logFile, true, "print");
                 menuSelection = input.nextInt();
                 input.nextLine();
     
                 if(menuSelection == 1)
                 {
-                    printAndLog(displayAllOfCanadaInfo(projectArray), logFile, true);
+                    printAndLog(displayAllOfCanadaInfo(projectArray), logFile, true, "println");
                 }
                 else if(menuSelection >= 2 && menuSelection <= 14)
                 {
@@ -51,13 +51,13 @@ public class Menu
                         String provOrTerrChosen = provAndTerr[menuSelection-2];
 
                         printAndLog("\nPlease make a choice from the statistics below for " +
-                        provOrTerrChosen + ":", logFile, true);
+                        provOrTerrChosen + ":", logFile, true, "print");
 
-                        printAndLog(displayProvTerrMenu(), logFile, true);
+                        printAndLog(displayProvTerrMenu(), logFile, true, "println");
 
                         try
                         {
-                            printAndLog("\nChoice: ", logFile, true);
+                            printAndLog("\nChoice: ", logFile, true, "print");
                             statisticsChoice = input.nextInt();
                             input.nextLine();
         
@@ -65,72 +65,80 @@ public class Menu
                             {
                                 case 1:
                                     printAndLog(displayCase1Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     break;
                                 
                                 case 2:
                                     printAndLog(displayCase2Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     break;
         
                                 case 3:
                                     printAndLog(displayCase3Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     break;
         
                                 case 4:
                                     printAndLog(displayCase4Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     break;
         
                                 case 5:
                                     printAndLog(displayCase1Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     printAndLog(displayCase2Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     printAndLog(displayCase3Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     printAndLog(displayCase4Results(projectArray, provOrTerrChosen),
-                                    logFile, true);
+                                    logFile, true, "println");
                                     break;
         
                                 case 6:
                                     statisticsMenuLoop = false;
-                                    printAndLog("", logFile, true);
+                                    printAndLog("", logFile, true, "println");
                                     break;
         
                                 default:
-                                    printAndLog("\nYou must enter a valid choice.", logFile, true);
+                                    printAndLog("\nYou must enter a valid choice.", logFile, true, "print");
                             }
                         }
                         catch(InputMismatchException error)
                         {
-                            printAndLog("\nYou must enter an integer!", logFile, true);
+                            printAndLog("\nYou must enter an integer!", logFile, true, "println");
                             input.nextLine();
                         }
                     }
                 }
                 else if(menuSelection == 15)
                 {
-                    printAndLog("\nExiting Program...", logFile, true);
+                    printAndLog("\nExiting Program...", logFile, true, "println");
                     mainMenuLoop = false;
                 }
                 else
                 {
-                    printAndLog("\nYou must enter a valid selection.\n", logFile, true);
+                    printAndLog("\nYou must enter a valid selection.\n", logFile, true, "println");
                 } 
             }
             catch(InputMismatchException error)
             {
-                printAndLog("\nYou must enter an integer!\n", logFile, true);
+                printAndLog("\nYou must enter an integer!\n", logFile, true, "println");
                 input.nextLine();
             }
         }
     }
 
-    public static void printAndLog(String pString, String pLogFileName, boolean pAppend)
+    public static void printAndLog(String pString, String pLogFileName,
+    boolean pAppend, String pPrintType)
     {
-        System.out.println(pString);
+        if(pPrintType == "println")
+        {
+            System.out.println(pString);
+        }
+        else if(pPrintType == "print")
+        {
+            System.out.print(pString);
+        }
 
         FileOutputStream fileStream = null;
         PrintWriter pw;
@@ -181,7 +189,7 @@ public class Menu
     }
     public static String displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
     {
-        String provTerrMenu = "> 1. Number of projects" +
+        String provTerrMenu = "\n> 1. Number of projects" +
         "\n> 2. Percentage of all projects located in this province/territory" +
         "\n> 3. Total number and percentage of Ongoing projects" +
         "\n> 4. Total number and percentage of Completed projects" +
@@ -194,7 +202,7 @@ public class Menu
     public static String displayCase1Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         String case1Results = "Number of projects in this province/territory: " +
-        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen) + "\n";
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
 
         return case1Results;
     }
@@ -202,29 +210,29 @@ public class Menu
     {
         String case2Results = "Percentage of all projects location in this province/territory: " +
         calculatePercentage(numProjectsProvTerr(pProjectArray, pProvOrTerrChosen),
-        totalNumProjects(pProjectArray)) + "%\n";
+        totalNumProjects(pProjectArray)) + "%";
 
         return case2Results;
     }
     public static String displayCase3Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         String case3Results = "Total number of Ongoing projects in this province/territory: " +
-        totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray) + "\n" +
+        totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray) + "" +
 
         "Percentage of Ongoing projects in this province/territory: " +
         calculatePercentage(totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray),
-        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n";
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%";
 
         return case3Results;
     }
     public static String displayCase4Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         String case4Results = "Total number of Completed projects in this province/territory: " +
-        totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray) + "\n" +
+        totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray) + "" +
 
         "Percentage of Completed projects in this province/territory: " +
         calculatePercentage(totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray),
-        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n";
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%";
 
         return case4Results;
     }
