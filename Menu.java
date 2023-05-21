@@ -7,10 +7,6 @@ public class Menu
     {
         Scanner input = new Scanner(System.in);
 
-        FileInputStream fs = null;
-        InputStreamReader isr = null;
-        BufferedReader br = null;
-
         /* Array that stores provinces/territories. To be used if user selects a specific
            province or territory in Canada. */
         String[] provAndTerr = {"Alberta", "British Columbia", "Manitoba",
@@ -22,44 +18,10 @@ public class Menu
         boolean mainMenuLoop = true;
         String path = "First_Nation_Infrastructure_Investment.csv";
 
-        int arraySize = numberOfLines(path, fs, isr, br);
+        int arraySize = numberOfLines(path);
         Project[] projectArray = new Project[arraySize-1];
 
-        try
-        {
-            fs = new FileInputStream(path);
-            isr = new InputStreamReader(fs);
-            br = new BufferedReader(isr);
-            int lineNum = 0;
-            String line = br.readLine();
-
-            line = br.readLine();
-
-            while(line != null)
-            {
-                String fields[];
-                fields = line.split(",");
-
-                String province = fields[0];
-                String beneficiary = fields[1];
-                String beneficiaryNum = fields[2];
-                String assetClass = fields[3];
-                String name = fields[4];
-                String stage = fields[6];
-
-                double latitude = Double.parseDouble(fields[7]);
-                double longitude = Double.parseDouble(fields[8]);
-                String coordinateSystem = fields[9];
-                Location location = new Location(latitude, longitude, coordinateSystem);
-
-                projectArray[lineNum] = new Project(province, beneficiary, beneficiaryNum,
-                assetClass, name, stage, location);
-
-                lineNum++;
-                line = br.readLine();
-            }
-        }
-        catch(IOException error){}
+        createProjectObjects(path, projectArray);
 
         System.out.println("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of " + totalNumProjects(projectArray) + 
@@ -242,6 +204,50 @@ public class Menu
         {}
 
         return lineNum;
+    }
+
+    public static void createProjectObjects(String pFileName, Project[] pProjectArray)
+    {
+        FileInputStream fs = null;
+        InputStreamReader isr;
+        BufferedReader br;
+        String line;
+        int lineNum;
+        
+        try
+        {
+            fs = new FileInputStream(pFileName);
+            isr = new InputStreamReader(fs);
+            br = new BufferedReader(isr);
+            lineNum = 0;
+            line = br.readLine();
+            line = br.readLine();
+
+            while(line != null)
+            {
+                String fields[];
+                fields = line.split(",");
+
+                String province = fields[0];
+                String beneficiary = fields[1];
+                String beneficiaryNum = fields[2];
+                String assetClass = fields[3];
+                String name = fields[4];
+                String stage = fields[6];
+
+                double latitude = Double.parseDouble(fields[7]);
+                double longitude = Double.parseDouble(fields[8]);
+                String coordinateSystem = fields[9];
+                Location location = new Location(latitude, longitude, coordinateSystem);
+
+                pProjectArray[lineNum] = new Project(province, beneficiary, beneficiaryNum,
+                assetClass, name, stage, location);
+
+                lineNum++;
+                line = br.readLine();
+            }
+        }
+        catch(IOException error){}
     }
 
     public static int totalNumProjects(Project[] pProjectArray)
