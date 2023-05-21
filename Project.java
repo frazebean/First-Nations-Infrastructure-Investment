@@ -19,7 +19,14 @@ public class Project
     // Mutator for province
     public void setProvince(String pProvince)
     {
-        province = pProvince;
+        if(pProvince == "")
+        {
+            System.out.println("Error: Province name cannot be blank.");
+        }
+        else
+        {
+            province = pProvince;
+        }
     }
 
     // Accessor for beneficiary
@@ -30,7 +37,14 @@ public class Project
     // Mutator for beneficiary
     public void setBeneficiary(String pBeneficiary)
     {
-        beneficiary = pBeneficiary;
+        if(pBeneficiary == "")
+        {
+            System.out.println("Error: Beneficiary cannot be blank.");
+        }
+        else
+        {
+            beneficiary = pBeneficiary;
+        }
     }
 
     // Accessor for beneficiaryNum
@@ -41,7 +55,14 @@ public class Project
     // Mutator for beneficiaryNum
     public void setBeneficiaryNum(String pBeneficiaryNum)
     {
-        beneficiaryNum = pBeneficiaryNum;
+        if(pBeneficiaryNum == "")
+        {
+            System.out.println("Error: Beneficiary Number cannot be blank.");
+        }
+        else
+        {
+            beneficiaryNum = pBeneficiaryNum;
+        }
     }
 
     // Accessor for assetClass
@@ -52,7 +73,14 @@ public class Project
     // Mutator for assetClass
     public void setAssetClass(String pAssetClass)
     {
-        assetClass = pAssetClass;
+        if(pAssetClass == "")
+        {
+            System.out.println("Error: Asset Class cannot be blank.");
+        }
+        else
+        {
+            assetClass = pAssetClass;
+        }
     }
 
     // Accessor for name
@@ -63,7 +91,14 @@ public class Project
     // Mutator for name
     public void setName(String pName)
     {
-        name = pName;
+        if(pName == "")
+        {
+            System.out.println("Error: Name cannot be blank.");
+        }
+        else
+        {
+            name = pName;
+        }
     }
 
     // Accessor for stage
@@ -74,7 +109,14 @@ public class Project
     // Mutator for stage
     public void setStage(String pStage)
     {
-        stage = pStage;
+        if(pStage == "")
+        {
+            System.out.println("Error: Stage cannot be blank.");
+        }
+        else
+        {
+            stage = pStage;
+        }
     }
 
     // Accessor for location
@@ -92,12 +134,60 @@ public class Project
     public Project(String pProvince, String pBeneficiary, String pBeneficiaryNum,
     String pAssetClass, String pName, String pStage, Location pLocation)
     {
-        province = pProvince;
-        beneficiary = pBeneficiary;
-        beneficiaryNum = pBeneficiaryNum;
-        assetClass = pAssetClass;
-        name = pName;
-        stage = pStage;
+        if(pProvince == "")
+        {
+            System.out.println("Error: Province name cannot be blank.");
+        }
+        else
+        {
+            province = pProvince;
+        }
+
+        if(pBeneficiary == "")
+        {
+            System.out.println("Error: Beneficiary cannot be blank.");
+        }
+        else
+        {
+            beneficiary = pBeneficiary;
+        }
+
+        if(pBeneficiaryNum == "")
+        {
+            System.out.println("Error: Beneficiary Number cannot be blank.");
+        }
+        else
+        {
+            beneficiaryNum = pBeneficiaryNum;
+        }
+
+        if(pAssetClass == "")
+        {
+            System.out.println("Error: Asset Class cannot be blank.");
+        }
+        else
+        {
+            assetClass = pAssetClass;
+        }
+        
+        if(pName == "")
+        {
+            System.out.println("Error: Name cannot be blank.");
+        }
+        else
+        {
+            name = pName;
+        }
+
+        if(pStage == "")
+        {
+            System.out.println("Error: Stage cannot be blank.");
+        }
+        else
+        {
+            stage = pStage;
+        }
+        
         location = pLocation;
     }
     // Copy constructor
