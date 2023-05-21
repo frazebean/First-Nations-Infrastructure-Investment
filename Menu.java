@@ -8,8 +8,8 @@ public class Menu
         Scanner input = new Scanner(System.in);
 
         int menuSelection, statisticsChoice;
-        boolean mainMenuLoop = true;
-        String logFile = "log_file.txt";
+        boolean mainMenuLoop = true, fileNameValidation = true;
+        String logFile = "log_file.txt", path = "";
 
         /* Array that stores provinces/territories. To be used if user selects a specific
            province or territory in Canada. */
@@ -19,9 +19,22 @@ public class Menu
                                "Northwest Territories", "Nunavut", "Yukon"};
 
         printAndLog("Please enter the filename to read: ", logFile, false, "print");
-        String fileName = input.nextLine();
+
+        while(fileNameValidation)
+        {
+            String fileName = input.nextLine();
+            if(fileName.equals("First_Nation_Infrastructure_Investment.csv"))
+            {
+                path = fileName;
+                fileNameValidation = false;
+            }
+            else
+            {
+                printAndLog("Enter the valid filename path in root folder: ", logFile,
+                true, "print");
+            }
+        }      
         System.out.println();
-        String path = fileName;
 
         int arraySize = numberOfLines(path);
         Project[] projectArray = new Project[arraySize-1];
