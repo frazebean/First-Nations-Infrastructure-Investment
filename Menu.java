@@ -63,47 +63,26 @@ public class Menu
                             switch(statisticsChoice)
                             {
                                 case 1:
-                                    System.out.print("Number of projects in this province/territory: " +
-                                    numProjectsProvTerr(projectArray, provOrTerrChosen) + "\n");
+                                    displayCase1Results(projectArray, provOrTerrChosen);
                                     break;
                                 
                                 case 2:
-                                    System.out.print("Percentage of all projects location in this province/territory: " +
-                                    calculatePercentage(numProjectsProvTerr(projectArray, provOrTerrChosen), totalNumProjects(projectArray)) + "%\n");
+                                    displayCase2Results(projectArray, provOrTerrChosen);
                                     break;
         
                                 case 3:
-                                    System.out.print("Total number of Ongoing projects in this province/territory: " +
-                                    totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray) + "\n");
-
-                                    System.out.print("Percentage of Ongoing projects in this province/territory: " +
-                                    calculatePercentage(totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
+                                    displayCase3Results(projectArray, provOrTerrChosen);
                                     break;
         
                                 case 4:
-                                    System.out.print("Total number of Completed projects in this province/territory: " +
-                                    totalStageProvTerr("Completed", provOrTerrChosen, projectArray) + "\n");
-
-                                    System.out.print("Percentage of Completed projects in this province/territory: " +
-                                    calculatePercentage(totalStageProvTerr("Completed", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
+                                    displayCase4Results(projectArray, provOrTerrChosen);
                                     break;
         
                                 case 5:
-                                    System.out.print("Number of projects in this province/territory: " +
-                                    numProjectsProvTerr(projectArray, provOrTerrChosen) + "\n");
-
-                                    System.out.print("Percentage of all projects location in this province/territory: " +
-                                    calculatePercentage(numProjectsProvTerr(projectArray, provOrTerrChosen), totalNumProjects(projectArray)) + "%\n");
-
-                                    System.out.print("Total number of Ongoing projects in this province/territory: " +
-                                    totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray) + "\n");
-                                    System.out.print("Percentage of Ongoing projects in this province/territory: " +
-                                    calculatePercentage(totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
-
-                                    System.out.print("Total number of Completed projects in this province/territory: " +
-                                    totalStageProvTerr("Completed", provOrTerrChosen, projectArray) + "\n");
-                                    System.out.print("Percentage of Completed projects in this province/territory: " +
-                                    calculatePercentage(totalStageProvTerr("Completed", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
+                                    displayCase1Results(projectArray, provOrTerrChosen);
+                                    displayCase2Results(projectArray, provOrTerrChosen);
+                                    displayCase3Results(projectArray, provOrTerrChosen);
+                                    displayCase4Results(projectArray, provOrTerrChosen);
                                     break;
         
                                 case 6:
@@ -164,7 +143,8 @@ public class Menu
         System.out.println("\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray));
         System.out.println("The total number of Ongoing projects: " + totalNumProjectStage("Ongoing", pProjectArray));
         System.out.println("The total number of projects Completed: " + totalNumProjectStage("Completed", pProjectArray));
-        System.out.println("The percentage of Completed Projects: " + calculatePercentage(totalNumProjectStage("Completed", pProjectArray), totalNumProjects(pProjectArray)) + "%\n");
+        System.out.println("The percentage of Completed Projects: " + calculatePercentage(totalNumProjectStage("Completed", pProjectArray),
+        totalNumProjects(pProjectArray)) + "%\n");
     }
     public static void displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
     {
@@ -174,6 +154,35 @@ public class Menu
         "\n> 4. Total number and percentage of Completed projects" +
         "\n> 5. All of the above statistics" +
         "\n> 6. Return to main menu");
+    }
+
+    public static void displayCase1Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        System.out.print("Number of projects in this province/territory: " +
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen) + "\n");
+    }
+    public static void displayCase2Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        System.out.print("Percentage of all projects location in this province/territory: " +
+        calculatePercentage(numProjectsProvTerr(pProjectArray, pProvOrTerrChosen), totalNumProjects(pProjectArray)) + "%\n");
+    }
+    public static void displayCase3Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        System.out.print("Total number of Ongoing projects in this province/territory: " +
+        totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray) + "\n");
+
+        System.out.print("Percentage of Ongoing projects in this province/territory: " +
+        calculatePercentage(totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray),
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n");
+    }
+    public static void displayCase4Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        System.out.print("Total number of Completed projects in this province/territory: " +
+        totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray) + "\n");
+
+        System.out.print("Percentage of Completed projects in this province/territory: " +
+        calculatePercentage(totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray),
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n");
     }
 
     /* This method finds the number of lines in the CSV file. Used to initialise the array size
