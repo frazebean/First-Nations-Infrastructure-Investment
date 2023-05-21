@@ -216,9 +216,11 @@ public class Menu
         "\n> 6. Return to main menu");
     }
 
-    public static int numberOfLines(String pFileName, FileInputStream fs, InputStreamReader isr,
-    BufferedReader br)
+    public static int numberOfLines(String pFileName)
     {
+        FileInputStream fs = null;
+        InputStreamReader isr;
+        BufferedReader br;
         String line;
         int lineNum = 0;
 
