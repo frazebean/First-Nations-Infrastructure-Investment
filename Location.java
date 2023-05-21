@@ -49,7 +49,14 @@ public class Location
     // Mutator for coordinateSystem
     public void setCoordinateSystem(String pCoordinateSystem)
     {
-        coordinateSystem = pCoordinateSystem;
+        if(pCoordinateSystem == "")
+        {
+            System.out.println("Error: Coordinate system cannot be blank.");
+        }
+        else
+        {
+            coordinateSystem = pCoordinateSystem;
+        }
     }
 
     // Constructor with parameters
@@ -73,7 +80,14 @@ public class Location
             longitude = pLongitude;
         }
 
-        coordinateSystem = pCoordinateSystem;
+        if(pCoordinateSystem == "")
+        {
+            System.out.println("Error: Coordinate system cannot be blank.");
+        }
+        else
+        {
+            coordinateSystem = pCoordinateSystem;
+        }
     }
     // Copy constructor
     public Location(Location pLocation)
