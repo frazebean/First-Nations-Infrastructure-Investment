@@ -9,7 +9,6 @@ public class Menu
 
         int menuSelection, statisticsChoice;
         boolean mainMenuLoop = true;
-        String path = "First_Nation_Infrastructure_Investment.csv";
         String logFile = "log_file.txt";
 
         /* Array that stores provinces/territories. To be used if user selects a specific
@@ -19,6 +18,11 @@ public class Menu
                                "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan",
                                "Northwest Territories", "Nunavut", "Yukon"};
 
+        printAndLog("Please enter the filename to read: ", logFile, false, "print");
+        String fileName = input.nextLine();
+        System.out.println();
+        String path = fileName;
+
         int arraySize = numberOfLines(path);
         Project[] projectArray = new Project[arraySize-1];
 
@@ -26,7 +30,7 @@ public class Menu
 
         printAndLog("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of " + totalNumProjects(projectArray) + 
-        " projects throughout Canada.", logFile, false, "println");
+        " projects throughout Canada.", logFile, true, "println");
 
         while(mainMenuLoop)
         {
