@@ -321,7 +321,7 @@ public class Menu
 
         divisionResult = (double)pFractionOfTotal / (double)pTotalNum;
         double percentage = divisionResult * 100.0;
-        double roundedPercentage = Math.round(percentage * 100.0) / 100;
+        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;
 
         return roundedPercentage;
     }
