@@ -32,7 +32,7 @@ public class Menu
         {
             boolean statisticsMenuLoop = true;
 
-            displayMainMenu();
+            printAndLog(displayMainMenu(), logFile, true);
 
             try
             {
@@ -42,7 +42,7 @@ public class Menu
     
                 if(menuSelection == 1)
                 {
-                    displayAllOfCanadaInfo(projectArray);
+                    printAndLog(displayAllOfCanadaInfo(projectArray), logFile, true);
                 }
                 else if(menuSelection >= 2 && menuSelection <= 14)
                 {
@@ -140,9 +140,9 @@ public class Menu
         }
     }
 
-    public static void displayMainMenu()
+    public static String displayMainMenu()
     {
-        System.out.println("Please make a selection from the Menu below.\n" +
+        String mainMenu = "Please make a selection from the Menu below.\n" +
         "\n> 1.  All of Canada" +
         "\n> 2.  Alberta" +
         "\n> 3.  British Columbia" +
@@ -157,15 +157,19 @@ public class Menu
         "\n> 12. Northwest Territories" +
         "\n> 13. Nunavut" +
         "\n> 14. Yukon" +
-        "\n> 15. Exit Program");
+        "\n> 15. Exit Program";
+
+        return mainMenu;
     }
-    public static void displayAllOfCanadaInfo(Project[] pProjectArray)
+    public static String displayAllOfCanadaInfo(Project[] pProjectArray)
     {
-        System.out.println("\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray));
-        System.out.println("The total number of Ongoing projects: " + totalNumProjectStage("Ongoing", pProjectArray));
-        System.out.println("The total number of projects Completed: " + totalNumProjectStage("Completed", pProjectArray));
-        System.out.println("The percentage of Completed Projects: " + calculatePercentage(totalNumProjectStage("Completed", pProjectArray),
-        totalNumProjects(pProjectArray)) + "%\n");
+        String allOfCanadaInfo = "\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray) +
+        "\nThe total number of Ongoing projects: " + totalNumProjectStage("Ongoing", pProjectArray) +
+        "\nThe total number of projects Completed: " + totalNumProjectStage("Completed", pProjectArray) +
+        "\nThe percentage of Completed Projects: " + calculatePercentage(totalNumProjectStage("Completed", pProjectArray),
+        totalNumProjects(pProjectArray)) + "%\n";
+
+        return allOfCanadaInfo;
     }
     public static void displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
     {
