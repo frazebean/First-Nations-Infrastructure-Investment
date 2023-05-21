@@ -1,3 +1,11 @@
+/********************************************************************************************
+ * Author: Ajmel Muadz                                                                      *
+ * Curtin Student ID: 21485604                                                              *
+ * Created: 21/05/2023                                                                      *   
+ * Purpose: Menu (Main) class to run the Location.java and Project.java classes as well as  *
+ *          main program functionality.                                                     *
+ ********************************************************************************************/
+
 import java.util.*;
 import java.io.*;
 
@@ -9,23 +17,28 @@ public class Menu
 
         int menuSelection, statisticsChoice;
         boolean mainMenuLoop = true, fileNameValidation = true;
-        String logFile = "log_file.txt", path = "";
+        // logFile stores any output displayed to the user in a program session.
+        // fileName is the CSV file to be used in the program.
+        String logFile = "log_file.txt", fileName = "";
 
-        /* Array that stores provinces/territories. To be used if user selects a specific
-           province or territory in Canada. */
+        // Array that stores provinces/territories. To be used if user selects a specific
+        // province or territory in Canada. provAndTerr is short form for province/territory
         String[] provAndTerr = {"Alberta", "British Columbia", "Manitoba",
                                "New Brunswick", "Newfoundland And Labrador", "Nova Scotia",
                                "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan",
                                "Northwest Territories", "Nunavut", "Yukon"};
 
+        // 'false' boolean in 3rd parameter when program starts: Used to reset the log file
+        //  every program start. (append value is set to 'false').
         printAndLog("Please enter the filename to read: ", logFile, false, "print");
 
+        // Loop used to validate if filename entered is correct. User cannot proceed with
+        // program until a correct filename is entered.
         while(fileNameValidation)
         {
-            String fileName = input.nextLine();
+            fileName = input.nextLine();
             if(fileName.equals("First_Nation_Infrastructure_Investment.csv"))
             {
-                path = fileName;
                 fileNameValidation = false;
             }
             else
@@ -36,35 +49,44 @@ public class Menu
         }      
         System.out.println();
 
-        int arraySize = numberOfLines(path);
-        Project[] projectArray = new Project[arraySize-1];
+        int arraySize = numberOfLines(fileName);  // Number of rows in CSV files is stored in variable.
+        Project[] projectArray = new Project[arraySize-1];  // Array to store projects has its value set.
 
-        createProjectObjects(path, projectArray);
+        // Before program starts, this method call will store each row in the CSV file as
+        // objects in the projectArray array.
+        createProjectObjects(fileName, projectArray);
 
         printAndLog("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of " + totalNumProjects(projectArray) + 
         " projects throughout Canada.", logFile, true, "println");
 
+        // Main program loop.
         while(mainMenuLoop)
         {
+            // Loop for province/territory menu is declared.
             boolean statisticsMenuLoop = true;
 
             printAndLog(displayMainMenu(), logFile, true, "println");
 
             try
             {
+                // User will choose any options from 1 to 15.
                 printAndLog("\nSelection: ", logFile, true, "print");
                 menuSelection = input.nextInt();
                 input.nextLine();
     
-                if(menuSelection == 1)
+                if(menuSelection == 1)  // If user chooses option 1.
                 {
+                    // All of Canada's information displayed.
                     printAndLog(displayAllOfCanadaInfo(projectArray), logFile, true, "println");
                 }
-                else if(menuSelection >= 2 && menuSelection <= 14)
+                else if(menuSelection >= 2 && menuSelection <= 14)  // If user chooses options 2 to 14.
                 {
-                    while(statisticsMenuLoop)
+                    while(statisticsMenuLoop)  // User is in province/territory menu loop
                     {
+                        // Province/Territory chosen is dynamically assigned based on position
+                        // in provAndTerr array. The index is [menuSelection-2] because there
+                        // are only 13 province/territory elements in the array, not 15.
                         String provOrTerrChosen = provAndTerr[menuSelection-2];
 
                         printAndLog("\nPlease make a choice from the statistics below for " +
@@ -74,6 +96,7 @@ public class Menu
 
                         try
                         {
+                            // User chooses statistics to display for province/territory
                             printAndLog("\nChoice: ", logFile, true, "print");
                             statisticsChoice = input.nextInt();
                             input.nextLine();
@@ -120,6 +143,7 @@ public class Menu
                                     printAndLog("\nYou must enter a valid choice.", logFile, true, "print");
                             }
                         }
+                        // Error handling in case user enters a string or decimal.
                         catch(InputMismatchException error)
                         {
                             printAndLog("\nYou must enter an integer!", logFile, true, "println");
@@ -127,16 +151,20 @@ public class Menu
                         }
                     }
                 }
+                // User chooses this option if quitting the program is desired.
                 else if(menuSelection == 15)
                 {
                     printAndLog("\nExiting Program...", logFile, true, "println");
                     mainMenuLoop = false;
                 }
+                // If user enters a number but it is not between 1 and 15, user is prompted to enter
+                // a valid choice.
                 else
                 {
                     printAndLog("\nYou must enter a valid selection.\n", logFile, true, "println");
                 } 
             }
+            // Error handling in case user enters a string or decimal.
             catch(InputMismatchException error)
             {
                 printAndLog("\nYou must enter an integer!\n", logFile, true, "println");
@@ -144,7 +172,13 @@ public class Menu
             }
         }
     }
-
+    /*******************************************************************************************
+     * Name: printAndLog                                                                       *
+     * Date: 21/05/2023                                                                        *
+     * Import: pString (String), pLogFileName (String), pAppend (Boolean), pPrintType (String) *
+     * Export: None                                                                            *
+     * Purpose: To print strings and write them to a file at the same time.                    *
+     *******************************************************************************************/
     public static void printAndLog(String pString, String pLogFileName,
     boolean pAppend, String pPrintType)
     {
@@ -162,7 +196,9 @@ public class Menu
 
         try
         {
-            fileStream = new FileOutputStream(pLogFileName, pAppend);  // Help from StackOverflow
+            // Appending documents in file writing done with the help of StackOverflow.
+            // APA 7 referencing supplied in another document.
+            fileStream = new FileOutputStream(pLogFileName, pAppend);
             pw = new PrintWriter(fileStream);
             pw.println(pString);
             pw.close();
@@ -172,7 +208,14 @@ public class Menu
             System.out.println("Error in writing to file: " + error.getMessage());
         }
     }
-
+    /*******************************************************************************************
+     * Name: displayMainMenu                                                                   *
+     * Date: 21/05/2023                                                                        *
+     * Import: None                                                                            *
+     * Export: mainMenu (String)                                                               *
+     * Purpose: To display the menu options the user can choose. In a method so the main()     *
+     *          method is cleaner/easier to read.                                              *
+     *******************************************************************************************/
     public static String displayMainMenu()
     {
         String mainMenu = "Please make a selection from the Menu below.\n" +
@@ -194,6 +237,14 @@ public class Menu
 
         return mainMenu;
     }
+    /*******************************************************************************************
+     * Name: displayAllOfCanadaInfo                                                            *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[])                                                       *
+     * Export: allOfCanadaInfo (String)                                                        *
+     * Purpose: To display relevant information if user chooses option 1 (All of Canada)       *
+     *          in the main menu.                                                              *
+     *******************************************************************************************/
     public static String displayAllOfCanadaInfo(Project[] pProjectArray)
     {
         String allOfCanadaInfo = "\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray) +
@@ -204,6 +255,14 @@ public class Menu
 
         return allOfCanadaInfo;
     }
+    /*******************************************************************************************
+     * Name: displayProvTerrMenu                                                               *
+     * Date: 21/05/2023                                                                        *
+     * Import: None                                                                            *
+     * Export: provTerrMenu (String)                                                           *
+     * Purpose: To display the menu if a user chooses a province/territory. In a method so the *
+     *          main() method is cleaner/easier to read.                                       *
+     *******************************************************************************************/
     public static String displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
     {
         String provTerrMenu = "\n> 1. Number of projects" +
@@ -215,7 +274,14 @@ public class Menu
 
         return provTerrMenu;
     }
-
+    /*******************************************************************************************
+     * Name: displayCase1Results                                                               *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pProvOrTerrChosen (String)                           *                                    
+     * Export: case1Results (String)                                                           *
+     * Purpose: To display the relevant information if user chooses option 1 in                *
+     *          province/territory menu.                                                       *
+     *******************************************************************************************/
     public static String displayCase1Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         String case1Results = "\nNumber of projects in this province/territory: " +
@@ -223,6 +289,14 @@ public class Menu
 
         return case1Results;
     }
+    /*******************************************************************************************
+     * Name: displayCase2Results                                                               *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pProvOrTerrChosen (String)                           *                                    
+     * Export: case2Results (String)                                                           *
+     * Purpose: To display the relevant information if user chooses option 2 in                *
+     *          province/territory menu.                                                       *
+     *******************************************************************************************/
     public static String displayCase2Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         String case2Results = "\nPercentage of all projects location in this province/territory: " +
@@ -231,6 +305,14 @@ public class Menu
 
         return case2Results;
     }
+    /*******************************************************************************************
+     * Name: displayCase3Results                                                               *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pProvOrTerrChosen (String)                           *                                    
+     * Export: case3Results (String)                                                           *
+     * Purpose: To display the relevant information if user chooses option 3 in                *
+     *          province/territory menu.                                                       *
+     *******************************************************************************************/
     public static String displayCase3Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         String case3Results = "\nTotal number of Ongoing projects in this province/territory: " +
@@ -242,6 +324,14 @@ public class Menu
 
         return case3Results;
     }
+    /*******************************************************************************************
+     * Name: displayCase4Results                                                               *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pProvOrTerrChosen (String)                           *                                    
+     * Export: case4Results (String)                                                           *
+     * Purpose: To display the relevant information if user chooses option 4 in                *
+     *          province/territory menu.                                                       *
+     *******************************************************************************************/
     public static String displayCase4Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         String case4Results = "\nTotal number of Completed projects in this province/territory: " +
@@ -254,8 +344,14 @@ public class Menu
         return case4Results;
     }
 
-    /* This method finds the number of lines in the CSV file. Used to initialise the array size
-       that stores project objects.*/
+    /*******************************************************************************************
+     * Name: numberOfLines                                                                     *
+     * Date: 21/05/2023                                                                        *
+     * Import: pFileName (String)                                                              *                                    
+     * Export: lineNum (Integer)                                                               *
+     * Purpose: To return the number of lines in CSV file. This value is then used to          *
+     *          instantiate the 'projectArray' array size.                                     *
+     *******************************************************************************************/
     public static int numberOfLines(String pFileName)
     {
         FileInputStream fs = null;
@@ -293,7 +389,13 @@ public class Menu
 
         return lineNum;
     }
-    /* This method creates project objects which will then be stored in an array. */
+    /*******************************************************************************************
+     * Name: createProjectObjects                                                              *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pFileName (String)                                   *                                    
+     * Export: None                                                                            *
+     * Purpose: To create Project objects to be populated in the projectArray array.           *
+     *******************************************************************************************/
     public static void createProjectObjects(String pFileName, Project[] pProjectArray)
     {
         FileInputStream fs = null;
@@ -312,6 +414,9 @@ public class Menu
 
             while(line != null)
             {
+                // Parsing for each row is done through each loop iteration. Every comma separator
+                // separates into 'fields' or 'columns'. Each field is then stored in variables.
+                // (Lines 423 to 432)
                 String fields[];
                 fields = line.split(",");
 
@@ -327,6 +432,7 @@ public class Menu
                 String coordinateSystem = fields[9];
                 Location location = new Location(latitude, longitude, coordinateSystem);
 
+                // Each index in the project array is then populated by a project object.
                 pProjectArray[lineNum] = new Project(province, beneficiary, beneficiaryNum,
                 assetClass, name, stage, location);
 
@@ -348,7 +454,13 @@ public class Menu
         }
     }
 
-    // Method finds the total number of projects in Canada. (All of Canada option)
+    /*******************************************************************************************
+     * Name: totalNumProjects                                                                  *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[])                                                       *                                    
+     * Export: totalNum (Integer)                                                              *
+     * Purpose: To find the total number of projects in the CSV file (All of Canada option)    *
+     *******************************************************************************************/
     public static int totalNumProjects(Project[] pProjectArray)
     {
         int totalNum = 0;
@@ -359,8 +471,14 @@ public class Menu
         }
         return totalNum;
     }
-    /* Method that finds either the total number of 'Ongoing' or 'Completed' projects, depending
-       on the parameter supplied for pStage. (All of Canada option) */
+    /*******************************************************************************************
+     * Name: totalNumProjectStage                                                              *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pStage (String)                                      *                                    
+     * Export: totalNumStage (Integer)                                                         *
+     * Purpose: Method that finds either the total number of 'Ongoing' or 'Completed' projects *
+     * depending on the parameter supplied for pStage. (All of Canada option)                  *
+     *******************************************************************************************/
     public static int totalNumProjectStage(String pStage, Project[] pProjectArray)
     {
         int totalNumStage = 0;
@@ -376,7 +494,14 @@ public class Menu
         }
         return totalNumStage;
     }
-    // Finds total number of projects of a specific province/territory (Province/Territory option)
+    /*******************************************************************************************
+     * Name: numProjectsProvTerr                                                               *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pProvOrTerrChosen (String)                           *                                    
+     * Export: totalNum (Integer)                                                              *
+     * Purpose: Finds total number of projects of a specific province/territory                *
+     *          (Province/Territory option)                                                    *
+     *******************************************************************************************/
     public static int numProjectsProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         int totalNum = 0;
@@ -390,9 +515,14 @@ public class Menu
         }
         return totalNum;
     }
-
-    // Method that finds either the total number of 'Ongoing' or 'Completed' projects in a 
-    // certain province/territory, depending on the pStage parameter suppli
+    /*******************************************************************************************
+     * Name: totalStageProvTerr                                                                *
+     * Date: 21/05/2023                                                                        *
+     * Import: pProjectArray (Project[]), pStage (String), pProvOrTerrChosen (String)          *                                    
+     * Export: totalNumStage (Integer)                                                         *
+     * Purpose: To find either the total number of 'Ongoing' or 'Completed' projects in a      *
+     *          certain province/territory, depending on the pStage parameter supplied.        *
+     *******************************************************************************************/
     public static int totalStageProvTerr(String pStage, String pProvOrTerrChosen, Project[] pProjectArray)
     {
         int totalNum = 0;
@@ -410,14 +540,23 @@ public class Menu
         return totalNum++;
     }
 
-    // Method that performs all relevant percentage calculations
+    /*******************************************************************************************
+     * Name: calculatePercentage                                                               *
+     * Date: 21/05/2023                                                                        *
+     * Import: pFractionOfTotal (Integer), pTotalNum (Integer)                                 *                                    
+     * Export: roundedPercentage (Double)                                                      *
+     * Purpose: Method that performs relevant percentage calculations, giving the result       *
+     *          rounded to 2 decimal places.                                                   *
+     *******************************************************************************************/
     public static double calculatePercentage(int pFractionOfTotal, int pTotalNum)
     {
         double divisionResult = 0.0;
 
         divisionResult = (double)pFractionOfTotal / (double)pTotalNum;
         double percentage = divisionResult * 100.0;
-        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;  // Help from StackOverflow
+        // Rounding to 2 decimal places done with the help of StackOverflow. APA 7 Referencing
+        // supplied in another document.
+        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;
 
         return roundedPercentage;
     }
