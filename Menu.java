@@ -124,8 +124,6 @@ public class Menu
         }
     }
 
-    // Method used to display String using System.out.println() and write the result to a log
-    // file (log_file.txt) at the same time.
     public static void printAndLog(String pString, String pFileName)
     {
         System.out.println(pString);
