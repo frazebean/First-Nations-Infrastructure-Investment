@@ -1,3 +1,12 @@
+/********************************************************************************************
+ * Author: Ajmel Muadz                                                                      *
+ * Curtin Student ID: 21485604                                                              *
+ * Created: 21/05/2023                                                                      *   
+ * Purpose: Location class to be used to store project object coordinates. Not currently    *
+ *          used in the Menu.java program, but created for possible utilisation in the      *
+ *          future.                                                                         *
+ ********************************************************************************************/
+
 public class Location 
 {
     // Class fields
@@ -13,6 +22,7 @@ public class Location
     // Mutator for latitude
     public void setLatitude(double pLatitude)
     {
+        // Input validation. Only values between -90 and 90 accepted for latitude.
         if(pLatitude < -90 || pLatitude > 90)
         {
             System.out.println("Error: Latitude can only be between -90 to 90 degrees.");
@@ -31,6 +41,7 @@ public class Location
     // Mutator for longitude
     public void setLongitude(double pLongitude)
     {
+        // Input validation. Only values between -180 and 180 accepted for longitude.
         if(pLongitude < -180 || pLongitude > 180)
         {
             System.out.println("Error: Longitude can only be between -180 to 180 degrees.");
