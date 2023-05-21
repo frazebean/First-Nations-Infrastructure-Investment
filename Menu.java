@@ -10,6 +10,7 @@ public class Menu
         int menuSelection, statisticsChoice;
         boolean mainMenuLoop = true;
         String path = "First_Nation_Infrastructure_Investment.csv";
+        String logFile = "log_file.txt";
 
         /* Array that stores provinces/territories. To be used if user selects a specific
            province or territory in Canada. */
@@ -23,9 +24,9 @@ public class Menu
 
         createProjectObjects(path, projectArray);
 
-        System.out.println("Welcome to the Investments in Indigenous community " +
+        printAndLog("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of " + totalNumProjects(projectArray) + 
-        " projects throughout Canada.");
+        " projects throughout Canada.", logFile, false);
 
         while(mainMenuLoop)
         {
@@ -116,6 +117,26 @@ public class Menu
                 System.out.println("\nYou must enter an integer!\n");
                 input.nextLine();
             }
+        }
+    }
+
+    public static void printAndLog(String pString, String pLogFileName, boolean pAppend)
+    {
+        System.out.println(pString);
+
+        FileOutputStream fileStream = null;
+        PrintWriter pw;
+
+        try
+        {
+            fileStream = new FileOutputStream(pLogFileName, pAppend);  // Help from StackOverflow
+            pw = new PrintWriter(fileStream);
+            pw.println(pString);
+            pw.close();
+        }
+        catch(IOException error)
+        {
+            System.out.println("Error in writing to file: " + error.getMessage());
         }
     }
 
