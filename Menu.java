@@ -7,16 +7,16 @@ public class Menu
     {
         Scanner input = new Scanner(System.in);
 
+        int menuSelection, statisticsChoice;
+        boolean mainMenuLoop = true;
+        String path = "First_Nation_Infrastructure_Investment.csv";
+
         /* Array that stores provinces/territories. To be used if user selects a specific
            province or territory in Canada. */
         String[] provAndTerr = {"Alberta", "British Columbia", "Manitoba",
                                "New Brunswick", "Newfoundland And Labrador", "Nova Scotia",
                                "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan",
                                "Northwest Territories", "Nunavut", "Yukon"};
-
-        int menuSelection, statisticsChoice;
-        boolean mainMenuLoop = true;
-        String path = "First_Nation_Infrastructure_Investment.csv";
 
         int arraySize = numberOfLines(path);
         Project[] projectArray = new Project[arraySize-1];
@@ -210,7 +210,17 @@ public class Menu
             fs.close();
         }
         catch(IOException error)
-        {}
+        {
+            if(fs != null)
+            {
+                try
+                {
+                    fs.close();
+                }
+                catch(IOException error2){}
+            }
+            System.out.println("Error in file processing: " + error.getMessage());
+        }
 
         return lineNum;
     }
@@ -255,7 +265,18 @@ public class Menu
                 line = br.readLine();
             }
         }
-        catch(IOException error){}
+        catch(IOException error)
+        {
+            if(fs != null)
+            {
+                try
+                {
+                    fs.close();
+                }
+                catch(IOException error2){}
+            }
+            System.out.println("Error in file processing: " + error.getMessage());
+        }
     }
 
     // Method finds the total number of projects in Canada. (All of Canada option)
@@ -324,9 +345,6 @@ public class Menu
     public static double calculatePercentage(int pFractionOfTotal, int pTotalNum)
     {
         double divisionResult = 0.0;
-
-        // pTotalNum = method
-        // pFractionOfTotal = method
 
         divisionResult = (double)pFractionOfTotal / (double)pTotalNum;
         double percentage = divisionResult * 100.0;
