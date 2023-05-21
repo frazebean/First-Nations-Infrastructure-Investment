@@ -60,7 +60,7 @@ public class Location
     // Mutator for coordinateSystem
     public void setCoordinateSystem(String pCoordinateSystem)
     {
-        if(pCoordinateSystem == "")
+        if(pCoordinateSystem.equals(""))
         {
             System.out.println("Error: Coordinate system cannot be blank.");
         }
@@ -91,7 +91,7 @@ public class Location
             longitude = pLongitude;
         }
 
-        if(pCoordinateSystem == "")
+        if(pCoordinateSystem.equals(""))
         {
             System.out.println("Error: Coordinate system cannot be blank.");
         }
