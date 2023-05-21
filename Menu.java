@@ -10,7 +10,7 @@ public class Menu
         /* Array that stores provinces/territories. To be used if user selects a specific
            province or territory in Canada. */
         String[] provAndTerr = {"Alberta", "British Columbia", "Manitoba",
-                               "New Brunswick", "Newfoundland and Labrador", "Nova Scotia",
+                               "New Brunswick", "Newfoundland And Labrador", "Nova Scotia",
                                "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan",
                                "Northwest Territories", "Nunavut", "Yukon"};
 
@@ -148,7 +148,7 @@ public class Menu
         "\n> 3.  British Columbia" +
         "\n> 4.  Manitoba" +
         "\n> 5.  New Brunswick" +
-        "\n> 6.  Newfoundland and Labrador" +
+        "\n> 6.  Newfoundland And Labrador" +
         "\n> 7.  Nova Scotia" +
         "\n> 8.  Ontario" +
         "\n> 9.  Prince Edward Island" +
