@@ -36,7 +36,7 @@ public class Menu
 
             try
             {
-                System.out.print("\nSelection: ");
+                printAndLog("\nSelection: ", logFile, true);
                 menuSelection = input.nextInt();
                 input.nextLine();
     
@@ -50,40 +50,48 @@ public class Menu
                     {
                         String provOrTerrChosen = provAndTerr[menuSelection-2];
 
-                        System.out.println("\nPlease make a choice from the statistics below for " +
-                        provOrTerrChosen + ":");
+                        printAndLog("\nPlease make a choice from the statistics below for " +
+                        provOrTerrChosen + ":", logFile, true);
 
-                        displayProvTerrMenu();
+                        printAndLog(displayProvTerrMenu(), logFile, true);
 
                         try
                         {
-                            System.out.print("\nChoice: ");
+                            printAndLog("\nChoice: ", logFile, true);
                             statisticsChoice = input.nextInt();
                             input.nextLine();
         
                             switch(statisticsChoice)
                             {
                                 case 1:
-                                    displayCase1Results(projectArray, provOrTerrChosen);
+                                    printAndLog(displayCase1Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
                                     break;
                                 
                                 case 2:
-                                    displayCase2Results(projectArray, provOrTerrChosen);
+                                    printAndLog(displayCase2Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
                                     break;
         
                                 case 3:
-                                    displayCase3Results(projectArray, provOrTerrChosen);
+                                    printAndLog(displayCase3Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
                                     break;
         
                                 case 4:
-                                    displayCase4Results(projectArray, provOrTerrChosen);
+                                    printAndLog(displayCase4Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
                                     break;
         
                                 case 5:
-                                    displayCase1Results(projectArray, provOrTerrChosen);
-                                    displayCase2Results(projectArray, provOrTerrChosen);
-                                    displayCase3Results(projectArray, provOrTerrChosen);
-                                    displayCase4Results(projectArray, provOrTerrChosen);
+                                    printAndLog(displayCase1Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
+                                    printAndLog(displayCase2Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
+                                    printAndLog(displayCase3Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
+                                    printAndLog(displayCase4Results(projectArray, provOrTerrChosen),
+                                    logFile, true);
                                     break;
         
                                 case 6:
@@ -171,43 +179,54 @@ public class Menu
 
         return allOfCanadaInfo;
     }
-    public static void displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
+    public static String displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
     {
-        System.out.println("> 1. Number of projects" +
+        String provTerrMenu = "> 1. Number of projects" +
         "\n> 2. Percentage of all projects located in this province/territory" +
         "\n> 3. Total number and percentage of Ongoing projects" +
         "\n> 4. Total number and percentage of Completed projects" +
         "\n> 5. All of the above statistics" +
-        "\n> 6. Return to main menu");
+        "\n> 6. Return to main menu";
+
+        return provTerrMenu;
     }
 
-    public static void displayCase1Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    public static String displayCase1Results(Project[] pProjectArray, String pProvOrTerrChosen)
     {
-        System.out.print("Number of projects in this province/territory: " +
-        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen) + "\n");
-    }
-    public static void displayCase2Results(Project[] pProjectArray, String pProvOrTerrChosen)
-    {
-        System.out.print("Percentage of all projects location in this province/territory: " +
-        calculatePercentage(numProjectsProvTerr(pProjectArray, pProvOrTerrChosen), totalNumProjects(pProjectArray)) + "%\n");
-    }
-    public static void displayCase3Results(Project[] pProjectArray, String pProvOrTerrChosen)
-    {
-        System.out.print("Total number of Ongoing projects in this province/territory: " +
-        totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray) + "\n");
+        String case1Results = "Number of projects in this province/territory: " +
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen) + "\n";
 
-        System.out.print("Percentage of Ongoing projects in this province/territory: " +
+        return case1Results;
+    }
+    public static String displayCase2Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        String case2Results = "Percentage of all projects location in this province/territory: " +
+        calculatePercentage(numProjectsProvTerr(pProjectArray, pProvOrTerrChosen),
+        totalNumProjects(pProjectArray)) + "%\n";
+
+        return case2Results;
+    }
+    public static String displayCase3Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        String case3Results = "Total number of Ongoing projects in this province/territory: " +
+        totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray) + "\n" +
+
+        "Percentage of Ongoing projects in this province/territory: " +
         calculatePercentage(totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray),
-        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n");
-    }
-    public static void displayCase4Results(Project[] pProjectArray, String pProvOrTerrChosen)
-    {
-        System.out.print("Total number of Completed projects in this province/territory: " +
-        totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray) + "\n");
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n";
 
-        System.out.print("Percentage of Completed projects in this province/territory: " +
+        return case3Results;
+    }
+    public static String displayCase4Results(Project[] pProjectArray, String pProvOrTerrChosen)
+    {
+        String case4Results = "Total number of Completed projects in this province/territory: " +
+        totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray) + "\n" +
+
+        "Percentage of Completed projects in this province/territory: " +
         calculatePercentage(totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray),
-        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n");
+        numProjectsProvTerr(pProjectArray, pProvOrTerrChosen)) + "%\n";
+
+        return case4Results;
     }
 
     /* This method finds the number of lines in the CSV file. Used to initialise the array size
