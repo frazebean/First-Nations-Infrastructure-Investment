@@ -25,7 +25,7 @@ public class Project
     // Mutator for province
     public void setProvince(String pProvince)
     {
-        if(pProvince == "")
+        if(pProvince.equals(""))
         {
             System.out.println("Error: Province name cannot be blank.");
         }
@@ -43,7 +43,7 @@ public class Project
     // Mutator for beneficiary
     public void setBeneficiary(String pBeneficiary)
     {
-        if(pBeneficiary == "")
+        if(pBeneficiary.equals(""))
         {
             System.out.println("Error: Beneficiary cannot be blank.");
         }
@@ -61,7 +61,7 @@ public class Project
     // Mutator for beneficiaryNum
     public void setBeneficiaryNum(String pBeneficiaryNum)
     {
-        if(pBeneficiaryNum == "")
+        if(pBeneficiaryNum.equals(""))
         {
             System.out.println("Error: Beneficiary Number cannot be blank.");
         }
@@ -79,7 +79,7 @@ public class Project
     // Mutator for assetClass
     public void setAssetClass(String pAssetClass)
     {
-        if(pAssetClass == "")
+        if(pAssetClass.equals(""))
         {
             System.out.println("Error: Asset Class cannot be blank.");
         }
@@ -97,7 +97,7 @@ public class Project
     // Mutator for name
     public void setName(String pName)
     {
-        if(pName == "")
+        if(pName.equals(""))
         {
             System.out.println("Error: Name cannot be blank.");
         }
@@ -115,7 +115,7 @@ public class Project
     // Mutator for stage
     public void setStage(String pStage)
     {
-        if(pStage == "")
+        if(pStage.equals(""))
         {
             System.out.println("Error: Stage cannot be blank.");
         }
@@ -140,7 +140,7 @@ public class Project
     public Project(String pProvince, String pBeneficiary, String pBeneficiaryNum,
     String pAssetClass, String pName, String pStage, Location pLocation)
     {
-        if(pProvince == "")
+        if(pProvince.equals(""))
         {
             System.out.println("Error: Province name cannot be blank.");
         }
@@ -149,7 +149,7 @@ public class Project
             province = pProvince;
         }
 
-        if(pBeneficiary == "")
+        if(pBeneficiary.equals(""))
         {
             System.out.println("Error: Beneficiary cannot be blank.");
         }
@@ -158,7 +158,7 @@ public class Project
             beneficiary = pBeneficiary;
         }
 
-        if(pBeneficiaryNum == "")
+        if(pBeneficiaryNum.equals(""))
         {
             System.out.println("Error: Beneficiary Number cannot be blank.");
         }
@@ -167,7 +167,7 @@ public class Project
             beneficiaryNum = pBeneficiaryNum;
         }
 
-        if(pAssetClass == "")
+        if(pAssetClass.equals(""))
         {
             System.out.println("Error: Asset Class cannot be blank.");
         }
@@ -176,7 +176,7 @@ public class Project
             assetClass = pAssetClass;
         }
         
-        if(pName == "")
+        if(pName.equals(""))
         {
             System.out.println("Error: Name cannot be blank.");
         }
@@ -185,7 +185,7 @@ public class Project
             name = pName;
         }
 
-        if(pStage == "")
+        if(pStage.equals(""))
         {
             System.out.println("Error: Stage cannot be blank.");
         }
@@ -210,12 +210,12 @@ public class Project
     // Default constructor
     public Project()
     {
-        province = "NULL province";
-        beneficiary = "NULL beneficiary";
-        beneficiaryNum = "NULL beneficiaryNum";
-        assetClass = "NULL assetClass";
-        name = "NULL name";
-        stage = "NULL stage";
+        province = "NULL";
+        beneficiary = "NULL";
+        beneficiaryNum = "NULL";
+        assetClass = "NULL";
+        name = "NULL";
+        stage = "NULL";
         location = new Location();
     }
 
