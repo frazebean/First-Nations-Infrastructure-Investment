@@ -96,33 +96,33 @@ public class Menu
         
                                 case 6:
                                     statisticsMenuLoop = false;
-                                    System.out.println();
+                                    printAndLog("", logFile, true);
                                     break;
         
                                 default:
-                                    System.out.println("\nYou must enter a valid choice.");
+                                    printAndLog("\nYou must enter a valid choice.", logFile, true);
                             }
                         }
                         catch(InputMismatchException error)
                         {
-                            System.out.println("\nYou must enter an integer!");
+                            printAndLog("\nYou must enter an integer!", logFile, true);
                             input.nextLine();
                         }
                     }
                 }
                 else if(menuSelection == 15)
                 {
-                    System.out.println("\nExiting Program...");
+                    printAndLog("\nExiting Program...", logFile, true);
                     mainMenuLoop = false;
                 }
                 else
                 {
-                    System.out.println("\nYou must enter a valid selection.\n");
+                    printAndLog("\nYou must enter a valid selection.\n", logFile, true);
                 } 
             }
             catch(InputMismatchException error)
             {
-                System.out.println("\nYou must enter an integer!\n");
+                printAndLog("\nYou must enter an integer!\n", logFile, true);
                 input.nextLine();
             }
         }
