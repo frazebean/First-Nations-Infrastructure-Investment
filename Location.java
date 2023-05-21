@@ -13,7 +13,14 @@ public class Location
     // Mutator for latitude
     public void setLatitude(double pLatitude)
     {
-        latitude = pLatitude;
+        if(pLatitude < -90 || pLatitude > 90)
+        {
+            System.out.println("Error: Latitude can only be between -90 to 90 degrees.");
+        }
+        else
+        {
+            latitude = pLatitude;
+        }
     }
 
     // Accessor for longitude
@@ -24,7 +31,14 @@ public class Location
     // Mutator for longitude
     public void setLongitude(double pLongitude)
     {
-        longitude = pLongitude;
+        if(pLongitude < -180 || pLongitude > 180)
+        {
+            System.out.println("Error: Longitude can only be between -180 to 180 degrees.");
+        }
+        else
+        {
+            longitude = pLongitude;
+        }
     }
 
     // Accessor for coordinateSystem
@@ -41,8 +55,24 @@ public class Location
     // Constructor with parameters
     public Location(double pLatitude, double pLongitude, String pCoordinateSystem)
     {
-        latitude = pLatitude;
-        longitude = pLongitude;
+        if(pLatitude < -90 || pLatitude > 90)
+        {
+            System.out.println("Error: Latitude can only be between -90 to 90 degrees.");
+        }
+        else
+        {
+            latitude = pLatitude;
+        }
+
+        if(pLongitude < -180 || pLongitude > 180)
+        {
+            System.out.println("Error: Longitude can only be between -180 to 180 degrees.");
+        }
+        else
+        {
+            longitude = pLongitude;
+        }
+
         coordinateSystem = pCoordinateSystem;
     }
     // Copy constructor
@@ -55,8 +85,8 @@ public class Location
     // Default constructor
     public Location()
     {
-        latitude = 50.00;
-        longitude = -50.00;
+        latitude = 45;
+        longitude = 90;
         coordinateSystem = "GCS_North_American_1983_CSRS";
     }
 
