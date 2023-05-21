@@ -69,7 +69,7 @@ public class Menu
                                 
                                 case 2:
                                     System.out.print("Percentage of all projects location in this province/territory: " +
-                                    percentAllProvTerr(projectArray, provOrTerrChosen) + "%\n");
+                                    calculatePercentage(numProjectsProvTerr(projectArray, provOrTerrChosen), totalNumProjects(projectArray)) + "%\n");
                                     break;
         
                                 case 3:
@@ -77,7 +77,7 @@ public class Menu
                                     totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray) + "\n");
 
                                     System.out.print("Percentage of Ongoing projects in this province/territory: " +
-                                    percentOngoingProvTerr(projectArray, provOrTerrChosen) + "%\n");
+                                    calculatePercentage(totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
                                     break;
         
                                 case 4:
@@ -85,7 +85,7 @@ public class Menu
                                     totalStageProvTerr("Completed", provOrTerrChosen, projectArray) + "\n");
 
                                     System.out.print("Percentage of Completed projects in this province/territory: " +
-                                    percentCompletedProvTerr(projectArray, provOrTerrChosen) + "%\n");
+                                    calculatePercentage(totalStageProvTerr("Completed", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
                                     break;
         
                                 case 5:
@@ -93,17 +93,17 @@ public class Menu
                                     numProjectsProvTerr(projectArray, provOrTerrChosen) + "\n");
 
                                     System.out.print("Percentage of all projects location in this province/territory: " +
-                                    percentAllProvTerr(projectArray, provOrTerrChosen) + "%\n");
+                                    calculatePercentage(numProjectsProvTerr(projectArray, provOrTerrChosen), totalNumProjects(projectArray)) + "%\n");
 
                                     System.out.print("Total number of Ongoing projects in this province/territory: " +
                                     totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray) + "\n");
                                     System.out.print("Percentage of Ongoing projects in this province/territory: " +
-                                    percentOngoingProvTerr(projectArray, provOrTerrChosen) + "%\n");
+                                    calculatePercentage(totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
 
                                     System.out.print("Total number of Completed projects in this province/territory: " +
                                     totalStageProvTerr("Completed", provOrTerrChosen, projectArray) + "\n");
                                     System.out.print("Percentage of Completed projects in this province/territory: " +
-                                    percentCompletedProvTerr(projectArray, provOrTerrChosen) + "%\n");
+                                    calculatePercentage(totalStageProvTerr("Completed", provOrTerrChosen, projectArray), numProjectsProvTerr(projectArray, provOrTerrChosen)) + "%\n");
                                     break;
         
                                 case 6:
@@ -164,7 +164,7 @@ public class Menu
         System.out.println("\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray));
         System.out.println("The total number of Ongoing projects: " + totalNumProjectStage("Ongoing", pProjectArray));
         System.out.println("The total number of projects Completed: " + totalNumProjectStage("Completed", pProjectArray));
-        System.out.println("The percentage of Completed Projects: " + percentCompletedProjects(pProjectArray) + "%\n");
+        System.out.println("The percentage of Completed Projects: " + calculatePercentage(totalNumProjectStage("Completed", pProjectArray), totalNumProjects(pProjectArray)) + "%\n");
     }
     public static void displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
     {
@@ -277,23 +277,6 @@ public class Menu
         }
         return totalNumStage;
     }
-    // Method finds the percentage of completed projects out of the total number of projects.
-    // (All of Canada option)
-    public static double percentCompletedProjects(Project[] pProjectArray)
-    {
-        double divisionResult = 0.0;
-
-        int totalNum = totalNumProjects(pProjectArray);
-        int totalNumCompleted = totalNumProjectStage("Completed", pProjectArray);
-
-        divisionResult = (double)totalNumCompleted / (double)totalNum;
-        double percentage = divisionResult * 100.0;
-        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;  // Got from StackOverflow
-
-        return roundedPercentage;
-    }
-
-
     // Finds total number of projects of a specific province/territory (Province/Territory option)
     public static int numProjectsProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
     {
@@ -308,21 +291,9 @@ public class Menu
         }
         return totalNum;
     }
-    // Finds the percentage of specific province/territory out of all projects in Canada
-    public static double percentAllProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
-    {
-        double divisionResult = 0.0;
 
-        int totalNum = totalNumProjects(pProjectArray);
-        int numProvTerr = numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
-
-        divisionResult = (double)numProvTerr / (double)totalNum;
-        double percentage = divisionResult * 100.0;
-        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;
-
-        return roundedPercentage;
-    }
-
+    // Method that finds either the total number of 'Ongoing' or 'Completed' projects in a 
+    // certain province/territory, depending on the pStage parameter suppli
     public static int totalStageProvTerr(String pStage, String pProvOrTerrChosen, Project[] pProjectArray)
     {
         int totalNum = 0;
@@ -340,30 +311,17 @@ public class Menu
         return totalNum++;
     }
 
-    public static double percentOngoingProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
+    // Method that performs all relevant percentage calculations
+    public static double calculatePercentage(int pFractionOfTotal, int pTotalNum)
     {
         double divisionResult = 0.0;
 
-        int totalNum = numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
-        int totalOngoing = totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray);
+        // pTotalNum = method
+        // pFractionOfTotal = method
 
-        divisionResult = (double)totalOngoing / (double)totalNum;
+        divisionResult = (double)pFractionOfTotal / (double)pTotalNum;
         double percentage = divisionResult * 100.0;
-        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;
-
-        return roundedPercentage;
-    }
-
-    public static double percentCompletedProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
-    {
-        double divisionResult = 0.0;
-
-        int totalNum = numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
-        int totalCompleted = totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray);
-
-        divisionResult = (double)totalCompleted / (double)totalNum;
-        double percentage = divisionResult * 100.0;
-        double roundedPercentage = Math.round(percentage * 100.0) / 100.0;
+        double roundedPercentage = Math.round(percentage * 100.0) / 100;
 
         return roundedPercentage;
     }
