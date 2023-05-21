@@ -101,7 +101,7 @@ public class Menu
                         }
                     }
                 }
-                else if(menuSelection == 0)
+                else if(menuSelection == 15)
                 {
                     System.out.println("\nExiting Program...");
                     mainMenuLoop = false;
@@ -136,7 +136,7 @@ public class Menu
         "\n> 12. Northwest Territories" +
         "\n> 13. Nunavut" +
         "\n> 14. Yukon" +
-        "\n> 0.  Exit Program");
+        "\n> 15. Exit Program");
     }
     public static void displayAllOfCanadaInfo(Project[] pProjectArray)
     {
