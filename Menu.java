@@ -163,8 +163,8 @@ public class Menu
     public static void displayAllOfCanadaInfo(Project[] pProjectArray)
     {
         System.out.println("\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray));
-        System.out.println("The total number of Ongoing projects: " + totalNumOngoingProjects(pProjectArray));
-        System.out.println("The total number of projects Completed: " + totalNumCompletedProjects(pProjectArray));
+        System.out.println("The total number of Ongoing projects: " + totalNumProjectStage("Ongoing", pProjectArray));
+        System.out.println("The total number of projects Completed: " + totalNumProjectStage("Completed", pProjectArray));
         System.out.println("The percentage of Completed Projects: " + percentCompletedProjects(pProjectArray) + "%\n");
     }
 
@@ -260,36 +260,20 @@ public class Menu
         return totalNum;
     }
 
-    public static int totalNumOngoingProjects(Project[] pProjectArray)
+    public static int totalNumProjectStage(String pStage, Project[] pProjectArray)
     {
-        int totalNumOngoing = 0;
+        int totalNumStage = 0;
 
-        for(int i = 0; i < pProjectArray.length; i++)
+        for (int i = 0; i < pProjectArray.length; i++) 
         {
             String stage = pProjectArray[i].getStage();
 
-            if(stage.equals("Ongoing"))
+            if(stage.equals(pStage))
             {
-                totalNumOngoing++;
+                totalNumStage++;
             }
         }
-        return totalNumOngoing;
-    }
-
-    public static int totalNumCompletedProjects(Project[] pProjectArray)
-    {
-        int totalNumCompleted = 0;
-
-        for(int i = 0; i < pProjectArray.length; i++)
-        {
-            String stage = pProjectArray[i].getStage();
-
-            if(stage.equals("Completed"))
-            {
-                totalNumCompleted++;
-            }
-        }
-        return totalNumCompleted;
+        return totalNumStage;
     }
 
     public static double percentCompletedProjects(Project[] pProjectArray)
@@ -297,7 +281,7 @@ public class Menu
         double divisionResult = 0.0;
 
         int totalNum = totalNumProjects(pProjectArray);
-        int totalNumCompleted = totalNumCompletedProjects(pProjectArray);
+        int totalNumCompleted = totalNumProjectStage("Completed", pProjectArray);
 
         divisionResult = (double)totalNumCompleted / (double)totalNum;
         double percentage = divisionResult * 100.0;
