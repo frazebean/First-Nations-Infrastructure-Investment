@@ -74,7 +74,7 @@ public class Menu
         
                                 case 3:
                                     System.out.print("Total number of Ongoing projects in this province/territory: " +
-                                    totalOngoingProvTerr(projectArray, provOrTerrChosen) + "\n");
+                                    totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray) + "\n");
 
                                     System.out.print("Percentage of Ongoing projects in this province/territory: " +
                                     percentOngoingProvTerr(projectArray, provOrTerrChosen) + "%\n");
@@ -82,7 +82,7 @@ public class Menu
         
                                 case 4:
                                     System.out.print("Total number of Completed projects in this province/territory: " +
-                                    totalCompletedProvTerr(projectArray, provOrTerrChosen) + "\n");
+                                    totalStageProvTerr("Completed", provOrTerrChosen, projectArray) + "\n");
 
                                     System.out.print("Percentage of Completed projects in this province/territory: " +
                                     percentCompletedProvTerr(projectArray, provOrTerrChosen) + "%\n");
@@ -96,12 +96,12 @@ public class Menu
                                     percentAllProvTerr(projectArray, provOrTerrChosen) + "%\n");
 
                                     System.out.print("Total number of Ongoing projects in this province/territory: " +
-                                    totalOngoingProvTerr(projectArray, provOrTerrChosen) + "\n");
+                                    totalStageProvTerr("Ongoing", provOrTerrChosen, projectArray) + "\n");
                                     System.out.print("Percentage of Ongoing projects in this province/territory: " +
                                     percentOngoingProvTerr(projectArray, provOrTerrChosen) + "%\n");
 
                                     System.out.print("Total number of Completed projects in this province/territory: " +
-                                    totalCompletedProvTerr(projectArray, provOrTerrChosen) + "\n");
+                                    totalStageProvTerr("Completed", provOrTerrChosen, projectArray) + "\n");
                                     System.out.print("Percentage of Completed projects in this province/territory: " +
                                     percentCompletedProvTerr(projectArray, provOrTerrChosen) + "%\n");
                                     break;
@@ -159,7 +159,6 @@ public class Menu
         "\n> 14. Yukon" +
         "\n> 0.  Exit Program");
     }
-
     public static void displayAllOfCanadaInfo(Project[] pProjectArray)
     {
         System.out.println("\nThe total number of projects in Canada: " + totalNumProjects(pProjectArray));
@@ -167,7 +166,6 @@ public class Menu
         System.out.println("The total number of projects Completed: " + totalNumProjectStage("Completed", pProjectArray));
         System.out.println("The percentage of Completed Projects: " + percentCompletedProjects(pProjectArray) + "%\n");
     }
-
     public static void displayProvTerrMenu()  // 'ProvTerr' is short form for 'Province/Territory'
     {
         System.out.println("> 1. Number of projects" +
@@ -178,6 +176,8 @@ public class Menu
         "\n> 6. Return to main menu");
     }
 
+    /* This method finds the number of lines in the CSV file. Used to initialise the array size
+       that stores project objects.*/
     public static int numberOfLines(String pFileName)
     {
         FileInputStream fs = null;
@@ -205,7 +205,7 @@ public class Menu
 
         return lineNum;
     }
-
+    /* This method creates project objects which will then be stored in an array. */
     public static void createProjectObjects(String pFileName, Project[] pProjectArray)
     {
         FileInputStream fs = null;
@@ -249,6 +249,7 @@ public class Menu
         catch(IOException error){}
     }
 
+    // Method finds the total number of projects in Canada. (All of Canada option)
     public static int totalNumProjects(Project[] pProjectArray)
     {
         int totalNum = 0;
@@ -259,7 +260,8 @@ public class Menu
         }
         return totalNum;
     }
-
+    /* Method that finds either the total number of 'Ongoing' or 'Completed' projects, depending
+       on the parameter supplied for pStage. (All of Canada option) */
     public static int totalNumProjectStage(String pStage, Project[] pProjectArray)
     {
         int totalNumStage = 0;
@@ -275,7 +277,8 @@ public class Menu
         }
         return totalNumStage;
     }
-
+    // Method finds the percentage of completed projects out of the total number of projects.
+    // (All of Canada option)
     public static double percentCompletedProjects(Project[] pProjectArray)
     {
         double divisionResult = 0.0;
@@ -290,6 +293,8 @@ public class Menu
         return roundedPercentage;
     }
 
+
+    // Finds total number of projects of a specific province/territory (Province/Territory option)
     public static int numProjectsProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         int totalNum = 0;
@@ -303,7 +308,7 @@ public class Menu
         }
         return totalNum;
     }
-
+    // Finds the percentage of specific province/territory out of all projects in Canada
     public static double percentAllProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         double divisionResult = 0.0;
@@ -318,21 +323,21 @@ public class Menu
         return roundedPercentage;
     }
 
-    public static int totalOngoingProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
+    public static int totalStageProvTerr(String pStage, String pProvOrTerrChosen, Project[] pProjectArray)
     {
-        int totalNumOngoing = 0;
+        int totalNum = 0;
 
         for(int i = 0; i < pProjectArray.length; i++)
         {
             if(pProjectArray[i].getProvince().equals(pProvOrTerrChosen))
             {
-                if(pProjectArray[i].getStage().equals("Ongoing"))
+                if(pProjectArray[i].getStage().equals(pStage))
                 {
-                    totalNumOngoing++;
+                    totalNum++;
                 }
             }
         }
-        return totalNumOngoing;
+        return totalNum++;
     }
 
     public static double percentOngoingProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
@@ -340,7 +345,7 @@ public class Menu
         double divisionResult = 0.0;
 
         int totalNum = numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
-        int totalOngoing = totalOngoingProvTerr(pProjectArray, pProvOrTerrChosen);
+        int totalOngoing = totalStageProvTerr("Ongoing", pProvOrTerrChosen, pProjectArray);
 
         divisionResult = (double)totalOngoing / (double)totalNum;
         double percentage = divisionResult * 100.0;
@@ -349,29 +354,12 @@ public class Menu
         return roundedPercentage;
     }
 
-    public static int totalCompletedProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
-    {
-        int totalNumOngoing = 0;
-
-        for(int i = 0; i < pProjectArray.length; i++)
-        {
-            if(pProjectArray[i].getProvince().equals(pProvOrTerrChosen))
-            {
-                if(pProjectArray[i].getStage().equals("Completed"))
-                {
-                    totalNumOngoing++;
-                }
-            }
-        }
-        return totalNumOngoing;
-    }
-
     public static double percentCompletedProvTerr(Project[] pProjectArray, String pProvOrTerrChosen)
     {
         double divisionResult = 0.0;
 
         int totalNum = numProjectsProvTerr(pProjectArray, pProvOrTerrChosen);
-        int totalCompleted = totalCompletedProvTerr(pProjectArray, pProvOrTerrChosen);
+        int totalCompleted = totalStageProvTerr("Completed", pProvOrTerrChosen, pProjectArray);
 
         divisionResult = (double)totalCompleted / (double)totalNum;
         double percentage = divisionResult * 100.0;
