@@ -136,7 +136,7 @@ public class Menu
         "\n> 12. Northwest Territories" +
         "\n> 13. Nunavut" +
         "\n> 14. Yukon" +
-        "\n> 15.  Exit Program");
+        "\n> 15. Exit Program");
     }
     public static void displayAllOfCanadaInfo(Project[] pProjectArray)
     {
