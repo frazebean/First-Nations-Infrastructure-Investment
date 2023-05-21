@@ -10,7 +10,6 @@ public class Menu
         int menuSelection, statisticsChoice;
         boolean mainMenuLoop = true;
         String path = "First_Nation_Infrastructure_Investment.csv";
-        String logFile = "log_file.txt";
 
         /* Array that stores provinces/territories. To be used if user selects a specific
            province or territory in Canada. */
@@ -24,13 +23,9 @@ public class Menu
 
         createProjectObjects(path, projectArray);
 
-        printAndLog("Welcome to the Investments in Indigenous community " +
+        System.out.println("Welcome to the Investments in Indigenous community " +
         "infrastructure\nProgram. There are a total of " + totalNumProjects(projectArray) + 
-        " projects throughout Canada.", logFile);
-
-        //System.out.println("Welcome to the Investments in Indigenous community " +
-        //"infrastructure\nProgram. There are a total of " + Integer.toString(totalNumProjects(projectArray)) + 
-        //" projects throughout Canada.");
+        " projects throughout Canada.");
 
         while(mainMenuLoop)
         {
@@ -124,6 +119,8 @@ public class Menu
         }
     }
 
+    // Method used to display String using System.out.println() and write the result to a log
+    // file (log_file.txt) at the same time.
     public static void printAndLog(String pString, String pFileName)
     {
         System.out.println(pString);
