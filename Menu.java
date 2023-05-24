@@ -6,8 +6,6 @@
  *          main program functionality.                                                     *
  ********************************************************************************************/
 
-// Change
-
 import java.util.*;
 import java.io.*;
 
