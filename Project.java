@@ -1,6 +1,5 @@
 /********************************************************************************************
  * Author: Ajmel Muadz                                                                      *
- * Curtin Student ID: 21485604                                                              *
  * Created: 21/05/2023                                                                      *   
  * Purpose: Project class used for instantiating project objects to be stored in the        *
  *          projectArray array in the Menu.java class                                       *
