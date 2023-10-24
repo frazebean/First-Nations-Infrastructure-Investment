@@ -1,6 +1,5 @@
 /********************************************************************************************
  * Author: Ajmel Muadz                                                                      *
- * Curtin Student ID: 21485604                                                              *
  * Created: 21/05/2023                                                                      *   
  * Purpose: Location class to be used to store project object coordinates. Not currently    *
  *          used in the Menu.java program, but created for possible utilisation in the      *
