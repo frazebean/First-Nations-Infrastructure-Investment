@@ -1,6 +1,5 @@
 /********************************************************************************************
  * Author: Ajmel Muadz                                                                      *
- * Curtin Student ID: 21485604                                                              *
  * Created: 21/05/2023                                                                      *   
  * Purpose: Menu (Main) class to run the Location.java and Project.java classes as well as  *
  *          main program functionality.                                                     *
